@@ -1,30 +1,21 @@
-console.log("Hello Word");
-computerPlay();
+console.log(`The Overall Winner is: ${game()}!`);
 
-function computerPlay() {
+// generate random number between 1 and 3 to return computer move: rock/paper/scissors
+function computerPlay() { 
     let num = Math.floor(Math.random()*3 + 1);
     if (num === 1) {
-        console.log("Rock");
-        // return "Rock";
+        //console.log("Rock");
+        return "Rock";
     } else if (num === 2) {
-        console.log("Paper");
-        //return "Paper";
+        //console.log("Paper");
+        return "Paper";
     } else {
-        console.log("Scissors");
-        //return "Scissors";
+        //console.log("Scissors");
+        return "Scissors";
     }
 }
 
-playRound("roCk","Rock");
-playRound("Rock","Paper");
-playRound("Rock","Scissors");
-playRound("Paper","Rock");
-playRound("Paper","Paper");
-playRound("Paper","Scissors");
-playRound("Scissors","Rock");
-playRound("Scissors","Paper");
-playRound("Scissors","Scissors");
-
+// returns whether player or computer wins the round
 function playRound(playerSelection, computerSelection) {
     
     // tie
@@ -65,19 +56,27 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
+// play 5 rounds of rock-paper-scissors and display winner
 function game() {
     let playerScore = 0, computerScore = 0;
-    for (let i=0; i<5; i++) {
-        let result = playRound("rock","paper"); 
+    for (let i=0; i<5; i++) { // play 5 rounds
+        let playerMove = prompt("Enter paper/scissors/rock: ").toLowerCase();
+        let computerMove = computerPlay().toLowerCase();
+
+        console.log(`Round ${i+1} \tPlayer: ${playerMove}, Computer: ${computerMove}`);
+
+        let result = playRound(playerMove,computerMove); 
+        // increment points for winner of round
         if (result==="player") {
-            player++; 
+            playerScore++; 
         } else if (result==="computer") {
-            computer++;
+            computerScore++;
         }
     }
-    if (player>computer) {
+    // determine player or computer as winner
+    if (playerScore>computerScore) {
         return "player";
-    } else if (player<computer) {
+    } else if (playerScore<computerScore) {
         return "computer";
     } else {
         return "tie";
